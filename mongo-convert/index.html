@@ -1,0 +1,42 @@
+<html>
+    <body>
+        <h4>ObjectId to UUID</h4>
+        <p>in</p>
+        <input id="in" type="text" size="50">
+        <button id="convertBtn" type="button">convert</button>
+        <p>out</p>
+        <input id="out" type="text" readonly size="50">
+
+<!--
+Example
+84b7447a-9b4e-4826-a075-6d52080d67cb UUID
+7a44b784-4e9b-2648-a075-6d52080d67cb ObjectId
+-->
+
+    </body>
+
+    <script>
+        document.getElementById("convertBtn").addEventListener("click", click)
+        function click(){
+            const inEl = document.getElementById("in")
+            objectIdStringToGuidString(inEl.value)
+        }
+
+        function objectIdStringToGuidString(str){
+            let t1 = translate(str, 0, 8)
+            let t2 = translate(str, 9, 13)
+            let t3 = translate(str, 14, 18)
+            let t4 = str.substring(19, 36)
+            let out = t1 + "-" + t2 + "-" + t3 + "-" + t4
+            document.getElementById("out").value = out
+        }
+
+        function translate(str, a, b){
+            let val = ""
+            for (let i = b; i >= a + 2; i-=2){
+                val += str.substring(i - 2, i)
+            }
+            return val
+        }
+    </script>
+</html>
